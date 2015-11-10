@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "bower": "^1.6.5",
+    "generator-angular": "^0.14.0",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-autoprefixer": "^2.0.0",
@@ -30,7 +31,8 @@
     "jshint-stylish": "^1.0.0",
     "karma-jasmine": "*",
     "karma-phantomjs-launcher": "*",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.0.0",
+    "yo": "^1.5.0"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -39,10 +41,12 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "generator-angular": "^0.14.0",
     "grunt-aws-s3": "^0.14.1",
     "grunt-contrib-imagemin": "^1.0.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.15",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "yo": "^1.5.0"
   }
 }

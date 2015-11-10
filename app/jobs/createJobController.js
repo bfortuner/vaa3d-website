@@ -2,13 +2,11 @@
 
 /**
  * @ngdoc function
- * @name vaad3dWebsiteApp.controller:MainCtrl
+ * @name vaad3dWebsiteApp.controller:CreateJobCtrl
  * @description
- * # MainCtrl
- * Controller of the vaad3dWebsiteApp
  */
 angular.module('vaad3dWebsiteApp')
-  .controller('MainCtrl', function () {
+  .controller('CreateJobCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
