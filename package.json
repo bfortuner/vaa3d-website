@@ -39,6 +39,8 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "grunt-aws-s3": "^0.14.1",
+    "grunt-contrib-imagemin": "^1.0.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.15",
     "phantomjs": "^1.9.18"

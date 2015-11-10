@@ -25,6 +25,12 @@ Run `grunt` for building and `grunt serve` for preview
 
 Running `grunt test` will run the unit tests with karma
 
+## Deploy to S3
+
+* Running `grunt serve:dist` will build the files into the dist/ directory
+* Copy the contents of dist/ into the S3 bucket
+* In S3, select all files, click Actions --> Make Public
+
 ## Troubleshooting
 
 UNMET PEER DEPENDENCY karma@^0.13.0
