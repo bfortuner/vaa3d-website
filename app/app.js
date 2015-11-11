@@ -8,8 +8,8 @@
  *
  * Main module of the application.
  */
-angular
-  .module('vaad3dWebsiteApp', [
+
+var vaad3dApp = angular.module('vaad3dWebsiteApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

@@ -7,8 +7,7 @@
  * # MainCtrl
  * Controller of the vaad3dWebsiteApp
  */
-angular.module('vaad3dWebsiteApp')
-  .controller('HomeCtrl', function () {
+vaad3dApp.controller('HomeCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

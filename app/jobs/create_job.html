@@ -1,14 +1,44 @@
-<div class="row marketing">
-  <h4>Vaa3D</h4>
+<div class="row">
+  <h4>1. Upload Files to S3</h4>
   <p>
-    Vaa3D extracts complex surface objects from images, and performs comprehensive analyses such as brain connectome mapping. Read more about <a ng-href="http://home.penglab.com/proj/vaa3d/home/index.html">Vaa3D</a>.
+    The first step is to upload your 3D image files to our "vaa3d-input" S3 bucket. Email <a href="mailto:vaa3dapi@gmail.com?Subject=Vaa3D%20S3%20Login" target="_top">vaa3dapi@gmail.com</a> for login/password.
+    <a href="{{s3LoginUrl}}" target="_blank">Login To S3</a>.
   </p>
-
-  <h4>Cloud</h4>
-  <p>
-    Run Vaa3D jobs on multiple 3D images simultaneously on AWS without having to worry about installing the software or running out of memory or disk space
-  </p>
-
-  <h4>Visualize</h4>
-  <p>Explore Vaa3D reconstructions in your browser (coming soon!)</p>
 </div>
+<div class="row">
+  <h4>2. Create Vaa3D Job</h4>
+  <p>
+    Select the files you would like to process. You will receive an email confirmation when the job completes.
+  </p>
+</div>
+<form ng-submit="submitForm(createNewJob.$valid)" name="createNewJob" enctype="multipart/form-data">
+  <div class="row">
+    <div class="form-group" ng-class="{ 'has-error' : emailAddress.$invalid && !emailAddress.$pristine }">
+      <label>Email Address</label>
+      <input ng-model="emailAddress" name="email" type="email" class="form-control" required>
+      <p ng-show="emailAddress.$invalid && !emailAddress.$pristine" class="help-block">Email address is required.</p>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped table-hover">
+      <!--<thead>
+        <tr>
+          <th></th>
+          <th>Filename</th>
+        </tr>
+      </thead>-->
+      <tbody>
+        <tr ng-repeat="(filename,selected) in filenames">
+          <!--<td>{{$index+1}}</td>-->
+          <td>
+            <input type="checkbox" ng-model="filenames[filename]">         
+          </td>
+          <td>{{filename}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" style="margin-bottom:20px;">
+    <button type="submit" class="btn btn-primary">Create Job</button>
+  </div>
+</form>
