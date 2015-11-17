@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row">
   <h4>1. Upload Files to S3</h4>
   <p>
@@ -13,10 +14,17 @@
 </div>
 <form ng-submit="submitForm(createNewJob.$valid)" name="createNewJob" enctype="multipart/form-data">
   <div class="row">
-    <div class="form-group" ng-class="{ 'has-error' : emailAddress.$invalid && !emailAddress.$pristine }">
+    <div class="form-group" ng-class="{ 'has-error' : email.$invalid && !email.$pristine }">
       <label>Email Address</label>
       <input ng-model="emailAddress" name="email" type="email" class="form-control" required>
-      <p ng-show="emailAddress.$invalid && !emailAddress.$pristine" class="help-block">Email address is required.</p>
+      <p ng-show="email.$invalid && !email.$pristine" class="help-block">Email address is required.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group" ng-class="{ 'has-error' : createNewJob.directory.$error.pattern && !directory.$pristine }">
+      <label>Output Directory</label>
+      <input ng-model="outputDir" ng-minlength=5 ng-pattern="outputDirRegex" name="directory" class="form-control" required>
+      <p ng-show="createNewJob.directory.$error.pattern && !directory.$pristine" class="help-block">{{outputDirRegexHelpMsg}}</p>
     </div>
   </div>
   <div class="row">
@@ -42,3 +50,4 @@
     <button type="submit" class="btn btn-primary">Create Job</button>
   </div>
 </form>
+</div>

@@ -19,10 +19,10 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <top-nav></top-nav>
+    <messages></messages>
     <div class="container">
-    <div ng-view=""></div>
+        <div ng-view=""></div>
     </div>
     <footer-nav></footer-nav>
 
@@ -56,8 +56,11 @@
         <script src="app.js"></script>
         <script src="config.js"></script>
         <script src="jobs/createJobService.js"></script>
-        <script src="home/homeController.js"></script>
         <script src="jobs/createJobController.js"></script>
+        <script src="common/messages/messagesService.js"></script>
+        <script src="common/messages/messagesController.js"></script>
+        <script src="common/messages/messagesDirective.js"></script>
+        <script src="home/homeController.js"></script>
         <script src="about/aboutController.js"></script>
         <script src="common/topnav/topNavDirective.js"></script>
         <script src="common/footernav/footerNavDirective.js"></script>

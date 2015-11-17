@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name vaad3dWebsiteApp.controller:CreateJobCtrl
+ * @name vaad3dWebsiteApp.service:createJobService
  * @description
  */
 vaad3dApp.service('createJobService', ['$http', '$filter', 'vaa3dConfig', 
@@ -15,7 +15,7 @@ vaad3dApp.service('createJobService', ['$http', '$filter', 'vaa3dConfig',
         });
         return promise;
 	    },
-      createNewJob: function(newJob) {
+        createNewJob: function(newJob) {
         var job = $filter('json')(newJob);
         var promise = $http({
             method:"POST",
