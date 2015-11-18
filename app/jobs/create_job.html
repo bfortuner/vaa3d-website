@@ -1,54 +1,119 @@
 <div class="container">
-<div class="row">
-  <h4>1. Upload Files to S3</h4>
-  <p>
-    The first step is to upload your 3D image files to our <span style="text-decoration:underline; font-weight:bold">vaa3d-input</span> S3 bucket. Email <a href="mailto:vaa3dapi@gmail.com?Subject=Vaa3D%20S3%20Login" target="_top">vaa3dapi@gmail.com</a> for login/password.
-    <a href="{{s3LoginUrl}}" target="_blank">Login To S3</a>.
-  </p>
-</div>
-<div class="row">
-  <h4>2. Create Vaa3D Job</h4>
-  <p>
-    Select the files you would like to process. You will receive an email confirmation when the job completes.
-  </p>
-</div>
-<form ng-submit="submitForm(createNewJob.$valid)" name="createNewJob" enctype="multipart/form-data">
   <div class="row">
-    <div class="form-group" ng-class="{ 'has-error' : email.$invalid && !email.$pristine }">
-      <label>Email Address</label>
-      <input ng-model="emailAddress" name="email" type="email" class="form-control" required>
-      <p ng-show="email.$invalid && !email.$pristine" class="help-block">Email address is required.</p>
+    <h4>1. Upload Files to S3</h4>
+    <p>
+      The first step is to upload your 3D image files to our 
+      <span style="text-decoration:underline; font-weight:bold">vaa3d-input</span> S3 bucket. 
+      Currently we support the following file types: .tif, .v3draw, .zip (files can be zipped and stored in zipped directories). 
+      Email <a href="mailto:vaa3dapi@gmail.com?Subject=Vaa3D%20S3%20Login" target="_top">vaa3dapi@gmail.com</a> for login/password.
+      <a href="{{s3LoginUrl}}" target="_blank">Login To S3</a>.
+    </p>
+  </div>
+  <div class="row">
+    <h4>2. Create Vaa3D Job</h4>
+    <p>
+      Select the files you would like to process. You will receive an email confirmation when the job completes.
+    </p>
+  </div>
+  <form ng-submit="submitForm(createNewJob.$valid)" name="createNewJob" enctype="multipart/form-data">
+    <div class="row">
+      <div class="form-group" ng-class="{ 'has-error' : emailAddress.$invalid && !emailAddress.$pristine }">
+        <label custom-popover 
+          popover-html="We will email you when your job completes." 
+          popover-placement="right" 
+          popover-title="Email Address">
+          Email Address
+        </label>
+        <input ng-model="newJob.emailAddress" name="emailAddress" type="email" class="form-control" required>
+        <p ng-show="emailAddress.$invalid && !emailAddress.$pristine" class="help-block">Email address is required.</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="form-group" ng-class="{ 'has-error' : createNewJob.directory.$error.pattern && !directory.$pristine }">
-      <label>Output Directory</label>
-      <input ng-model="outputDir" ng-minlength=5 ng-pattern="outputDirRegex" name="directory" class="form-control" required>
-      <p ng-show="createNewJob.directory.$error.pattern && !directory.$pristine" class="help-block">{{outputDirRegexHelpMsg}}</p>
+    <div class="row">
+      <div class="form-group" ng-class="{ 'has-error' : createNewJob.outputDir.$error.pattern && !outputDir.$pristine }">
+        <label custom-popover 
+          popover-html="We will create a new directory in vaa3d-output to store your file results. {{outputDirRegexHelpMsg}}." 
+          popover-placement="right" 
+          popover-title="Output Directory">
+          Output Directory
+        </label>
+        <input ng-model="newJob.outputDir" name="outputDir" ng-minlength=5 ng-pattern="outputDirRegex" class="form-control" required>
+        <p ng-show="createNewJob.outputDir.$error.pattern && !outputDir.$pristine" class="help-block">{{outputDirRegexHelpMsg}}</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search filenames">-->
-    <table class="table table-striped table-hover">
-      <!--<thead>
-        <tr>
-          <th></th>
-          <th>Filename</th>
-        </tr>
-      </thead>-->
-      <tbody>
-        <tr ng-repeat="(filename,selected) in filenames">
-          <!--<td>{{$index+1}}</td>-->
-          <td>
-            <input type="checkbox" ng-model="filenames[filename]">         
-          </td>
-          <td>{{filename}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row" style="margin-bottom:20px;">
-    <button type="submit" class="btn btn-primary">Create Job</button>
-  </div>
-</form>
+    <div class="row">
+      <div class="form-group">
+        <label custom-popover 
+          popover-html="Select the type of job to see list of available plugins" 
+          popover-placement="right" 
+          popover-title="Job Type">
+          Job Type
+        </label>
+        <select 
+          ng-model="newJob.jobType" 
+          name="jobType" 
+          class="form-control" 
+          ng-change="newJob.pluginName = jobTypePlugins[newJob.jobType][0]">
+          <option ng-repeat="type in jobTypes track by $index">{{type}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="formcolumnleft col-xs-6" style="">
+        <div class="form-group">
+          <label custom-popover
+            popover-html="The name of the Vaa3D plugin you wish to run." 
+            popover-placement="right" 
+            popover-title="Plugin/Tool">
+            Plugin/Tool
+          </label>
+          <select 
+            ng-model="newJob.pluginName"
+            name="pluginName" 
+            class="form-control">
+            <option ng-repeat="plugin in jobTypePlugins[newJob.jobType] track by $index">{{plugin}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="formcolumnright col-xs-6" style="">
+        <div class="form-group">
+          <label custom-popover
+            popover-html="Select plugin-specific runtime parameters. Options include method, channel.." 
+            popover-placement="right" 
+            popover-title="Plugin Settings">
+            Plugin Settings
+          </label>
+        <div class="col-xs-12 btn btn-xl btn-primary" ng-click="openSettingsPanel()">Open Settings Panel</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <label custom-popover
+          popover-html="Files currently stored in the vaa3d-input S3 bucket. Upload your files first to view them here."
+          popover-placement="right" 
+          popover-title="Available Files">
+          Available Files
+        </label>
+      <!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search filenames">-->
+      <table class="table table-striped table-hover">
+        <!--<thead>
+          <tr>
+            <th></th>
+            <th>Filename</th>
+          </tr>
+        </thead>-->
+        <tbody>
+          <tr ng-repeat="(filename,selected) in filenames">
+            <!--<td>{{$index+1}}</td>-->
+            <td>
+              <input type="checkbox" ng-model="filenames[filename]">         
+            </td>
+            <td>{{filename}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row" style="margin-bottom:20px;">
+      <button type="submit" class="btn btn-success">Create Job</button>
+    </div>
+  </form>
 </div>
