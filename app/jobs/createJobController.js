@@ -24,8 +24,8 @@ vaad3dApp.controller('CreateJobCtrl',
 			$scope.newJob.jobType = $scope.jobTypes[0];
 			$scope.newJob.pluginName = $scope.jobTypePlugins[$scope.jobTypes[0]][0];
 			$scope.newJob.pluginSettings = {
-				'channel' : 1,
-				'method' : 'APP1'
+				'channel' : $scope.plugins[$scope.newJob.pluginName].channel.default,
+				'method' : $scope.plugins[$scope.newJob.pluginName].method.default
 			},
 			$scope.newJob.filenames = [];
 		};

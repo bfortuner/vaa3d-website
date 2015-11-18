@@ -87,7 +87,14 @@
             popover-title="Plugin Settings">
             Plugin Settings
           </label>
-        <div class="col-xs-12 btn btn-xl btn-primary" ng-click="openSettingsPanel()">Open Settings Panel</div>
+          <button type="button"
+            uib-popover-template="'jobs/plugin_settings_popover.html'"
+            popover-placement="top" 
+            popover-trigger="click" 
+            popover-title="{{newJob.pluginName}} Settings" 
+            class="col-xs-12 btn btn-xl btn-primary">
+            Open Settings Panel
+          </button>
         </div>
       </div>
     </div>

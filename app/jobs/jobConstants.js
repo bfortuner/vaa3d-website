@@ -11,8 +11,14 @@ vaad3dApp.constant('jobConstants', {
        },
        'PLUGINS' : {
               'Vaa3D_Neuron2' : {
-                     'channel' : 1,
-                     'methods' : ['APP1', 'APP2'] 
+                     'channel' : { 
+                            'values' : ['1','2','3','4','5','6','7','8','9','10'],
+                            'default' : '1'
+                     },
+                     'method' : {
+                            'values' : ['APP1', 'APP2'],
+                            'default' : 'APP1'
+                     } 
               }
        }
 })
