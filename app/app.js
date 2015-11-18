@@ -15,7 +15,8 @@ var vaad3dApp = angular.module('vaad3dWebsiteApp', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
