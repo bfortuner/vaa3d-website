@@ -31,44 +31,44 @@ vaad3dApp.controller('CreateJobCtrl',
 		};
 		initForm();
 
-	  createJobService.getAvailableFiles().then(function(d) {
-        $scope.availableFilenames = d.filenames;
-        buildFilenamesObj();
-      });
-
-	  var buildFilenamesObj = function() {
-	  	$scope.filenames = {}
-        for (var i=0; i < $scope.availableFilenames.length; i++) {
-          $scope.filenames[$scope.availableFilenames[i]] = false;
-        }
-	  };
-      
-	  var getSelectedFilenames = function() {
-	  	var filenames = [];
-		for (var file in $scope.filenames) {
-		  if ($scope.filenames.hasOwnProperty(file) && $scope.filenames[file]) {
-		    filenames.push(file)
-		  }
-		}
-	  	return filenames;	
-	  };
-
-	  $scope.submitForm = function() {
-	    var selectedFiles = getSelectedFilenames();
-	    if (selectedFiles.length < 1) {
-		  alert("Please select at least 1 file and resubmit");
-		  return false;
-	    }
-	    $scope.newJob.filenames = selectedFiles
-	    console.log($scope.newJob);
-		createJobService.createNewJob($scope.newJob).then(function(d) {
-	  	  MessagesService.openAlert({
-        	type: 'success',
-        	text: jobCompleteMessage
-      	  });
-		  $location.path('/');
+		createJobService.getAvailableFiles().then(function(d) {
+			$scope.availableFilenames = d.filenames;
+			buildFilenamesObj();
 		});
-	  }; 
+
+		var buildFilenamesObj = function() {
+			$scope.filenames = {}
+			for (var i=0; i < $scope.availableFilenames.length; i++) {
+				$scope.filenames[$scope.availableFilenames[i]] = false;
+			}
+		};
+
+		var getSelectedFilenames = function() {
+			var filenames = [];
+			for (var file in $scope.filenames) {
+				if ($scope.filenames.hasOwnProperty(file) && $scope.filenames[file]) {
+					filenames.push(file)
+				}
+			}
+			return filenames;	
+		};
+
+		$scope.submitForm = function() {
+			var selectedFiles = getSelectedFilenames();
+			if (selectedFiles.length < 1) {
+				alert("Please select at least 1 file and resubmit");
+				return false;
+			}
+			$scope.newJob.filenames = selectedFiles
+			console.log($scope.newJob);
+			createJobService.createNewJob($scope.newJob).then(function(d) {
+		  		MessagesService.openAlert({
+					type: 'success',
+					text: jobCompleteMessage
+				});
+				$location.path('/');
+			});
+		}; 
 
    }
 ]);

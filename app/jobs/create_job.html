@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row main">
     <h4>1. Upload Files to S3</h4>
     <p>
       The first step is to upload your 3D image files to our 
@@ -9,14 +9,14 @@
       <a href="{{s3LoginUrl}}" target="_blank">Login To S3</a>.
     </p>
   </div>
-  <div class="row">
+  <div class="row main">
     <h4>2. Create Vaa3D Job</h4>
     <p>
       Select the files you would like to process. You will receive an email confirmation when the job completes.
     </p>
   </div>
   <form ng-submit="submitForm(createNewJob.$valid)" name="createNewJob" enctype="multipart/form-data">
-    <div class="row">
+    <div class="row main">
       <div class="form-group" ng-class="{ 'has-error' : emailAddress.$invalid && !emailAddress.$pristine }">
         <label custom-popover 
           popover-html="We will email you when your job completes." 
@@ -28,7 +28,7 @@
         <p ng-show="emailAddress.$invalid && !emailAddress.$pristine" class="help-block">Email address is required.</p>
       </div>
     </div>
-    <div class="row">
+    <div class="row main">
       <div class="form-group" ng-class="{ 'has-error' : createNewJob.outputDir.$error.pattern && !outputDir.$pristine }">
         <label custom-popover 
           popover-html="We will create a new directory in vaa3d-output to store your file results. {{outputDirRegexHelpMsg}}." 
@@ -40,7 +40,7 @@
         <p ng-show="createNewJob.outputDir.$error.pattern && !outputDir.$pristine" class="help-block">{{outputDirRegexHelpMsg}}</p>
       </div>
     </div>
-    <div class="row">
+    <div class="row main">
       <div class="form-group">
         <label custom-popover 
           popover-html="Select the type of job to see list of available plugins" 
@@ -57,7 +57,7 @@
         </select>
       </div>
     </div>
-    <div class="row">
+    <div class="row main">
       <div class="formcolumnleft col-xs-6" style="">
         <div class="form-group">
           <label custom-popover
@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row main">
         <label custom-popover
           popover-html="Files currently stored in the vaa3d-input S3 bucket. Upload your files first to view them here."
           popover-placement="right" 
@@ -112,7 +112,7 @@
         </tbody>
       </table>
     </div>
-    <div class="row" style="margin-bottom:20px;">
+    <div class="row main" style="margin-bottom:20px;">
       <button type="submit" class="btn btn-success">Create Job</button>
     </div>
   </form>
