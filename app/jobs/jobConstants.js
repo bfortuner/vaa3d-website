@@ -16,8 +16,8 @@ vaad3dApp.constant('jobConstants', {
                             'default' : '1'
                      },
                      'method' : {
-                            'values' : ['APP1', 'APP2'],
-                            'default' : 'APP1'
+                            'values' : ['app1', 'app2'],
+                            'default' : 'app1'
                      } 
               }
        }
