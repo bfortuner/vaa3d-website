@@ -3,17 +3,17 @@
     <div class="form-group">
       <label>Method</label>
         <select 
-          ng-model="newJob.pluginSettings.method"
+          ng-model="newJob.plugin.method"
           name="methodName" 
           class="form-control">
-          <option ng-repeat="method in plugins[newJob.pluginName].method.values">{{method}}</option>
+          <option ng-repeat="method in plugins[newJob.plugin.name].method.values">{{method}}</option>
         </select>
       <label>Channel</label>
         <select 
-          ng-model="newJob.pluginSettings.channel"
+          ng-model="newJob.plugin.settings.params.channel"
           name="channelType" 
           class="form-control">
-          <option ng-repeat="channel in plugins[newJob.pluginName].channel.values">{{channel}}</option>
+          <option ng-repeat="channel in plugins[newJob.plugin.name].settings.params.channel.values">{{channel}}</option>
         </select>
       </div>
   </form>

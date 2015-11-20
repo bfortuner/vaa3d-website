@@ -15,6 +15,13 @@ vaad3dApp.service('createJobService', ['$http', '$filter', 'vaa3dConfig',
         });
         return promise;
 	    },
+        getJobTypePlugins: function() {
+        var url = vaa3dConfig.url + "/plugins";
+        var promise = $http.get(url).then(function (response) {
+            return response.data;
+        });
+        return promise;
+        },
         createNewJob: function(newJob) {
         var job = $filter('json')(newJob);
         var promise = $http({

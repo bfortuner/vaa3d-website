@@ -4,7 +4,7 @@
     <p>
       The first step is to upload your 3D image files to our 
       <span style="text-decoration:underline; font-weight:bold">vaa3d-input</span> S3 bucket. 
-      Currently we support the following file types: .tif, .v3draw, .zip (files can be zipped and stored in zipped directories). 
+      Currently we support the following file types: .tif, .v3draw, .v3dpbd, .raw, .zip (files can be zipped and stored in zipped directories). 
       Email <a href="mailto:vaa3dapi@gmail.com?Subject=Vaa3D%20S3%20Login" target="_top">vaa3dapi@gmail.com</a> for login/password.
       <a href="{{s3LoginUrl}}" target="_blank">Login To S3</a>.
     </p>
@@ -55,7 +55,7 @@
           ng-model="newJob.jobType" 
           name="jobType" 
           class="form-control" 
-          ng-change="newJob.pluginName = jobTypePlugins[newJob.jobType][0]">
+          ng-change="newJob.plugin.name = jobTypePlugins[newJob.jobType][0]">
           <option ng-repeat="type in jobTypes track by $index">{{type}}</option>
         </select>
       </div>
@@ -71,7 +71,8 @@
             Plugin/Tool
           </label>
           <select 
-            ng-model="newJob.pluginName"
+            ng-model="newJob.plugin.name"
+            ng-change="refreshPluginSettingsMenu()"
             name="pluginName" 
             class="form-control">
             <option ng-repeat="plugin in jobTypePlugins[newJob.jobType] track by $index">{{plugin}}</option>
@@ -91,7 +92,7 @@
             uib-popover-template="'jobs/plugin_settings.html'"
             popover-placement="top" 
             popover-trigger="click" 
-            popover-title="{{newJob.pluginName}} Settings" 
+            popover-title="{{newJob.plugin.name}}" 
             class="col-xs-12 btn btn-xl btn-primary">
             Open Settings Panel
           </button>

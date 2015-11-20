@@ -13,27 +13,32 @@ vaad3dApp.controller('CreateJobCtrl',
 		$scope.outputDirRegex = /^[a-zA-Z0-9]{1,128}$/;
 		$scope.outputDirRegexHelpMsg = "Name must be alpha-numeric and less than 128 chars";
 		var jobCompleteMessage = "Success! You will receive an email when the job completes!";
-		$scope.jobTypes = jobConstants.JOB_TYPES;
-		$scope.jobTypePlugins = jobConstants.JOB_TYPE_PLUGINS;
-		$scope.plugins = jobConstants.PLUGINS;
 
 		var initForm = function() {
 			$scope.newJob = {};
 			$scope.newJob.emailAddress = '';
 			$scope.newJob.outputDir = '';
 			$scope.newJob.jobType = $scope.jobTypes[0];
-			$scope.newJob.pluginName = $scope.jobTypePlugins[$scope.jobTypes[0]][0];
-			$scope.newJob.pluginSettings = {
-				'channel' : $scope.plugins[$scope.newJob.pluginName].channel.default,
-				'method' : $scope.plugins[$scope.newJob.pluginName].method.default
-			},
+			$scope.newJob.plugin = {};
+			$scope.newJob.plugin.name = $scope.jobTypePlugins[$scope.jobTypes[0]][0];
+			$scope.newJob.plugin.method = $scope.plugins[$scope.newJob.plugin.name].method.default;
+			$scope.newJob.plugin.settings = {};
+			$scope.newJob.plugin.settings.params = {};
+			$scope.newJob.plugin.settings.params.channel =
+				$scope.plugins[$scope.newJob.plugin.name].settings.params.channel.default;
 			$scope.newJob.filenames = [];
 		};
-		initForm();
 
 		createJobService.getAvailableFiles().then(function(d) {
 			$scope.availableFilenames = d.filenames;
 			buildFilenamesObj();
+		});
+
+		createJobService.getJobTypePlugins().then(function(d) {
+			$scope.jobTypes = d.job_types;
+			$scope.jobTypePlugins = d.job_type_plugins;
+			$scope.plugins = d.plugins;
+			initForm();
 		});
 
 		var buildFilenamesObj = function() {
@@ -51,6 +56,13 @@ vaad3dApp.controller('CreateJobCtrl',
 				}
 			}
 			return filenames;	
+		};
+
+		$scope.refreshPluginSettingsMenu = function() {
+			$scope.newJob.plugin.settings.params.channel = 
+				$scope.plugins[$scope.newJob.plugin.name].settings.params.channel.default;
+			$scope.newJob.plugin.method = 
+				$scope.plugins[$scope.newJob.plugin.name].method.default;
 		};
 
 		$scope.submitForm = function() {
