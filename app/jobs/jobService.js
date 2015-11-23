@@ -14,6 +14,13 @@ vaad3dApp.service('JobService', ['$http', '$filter', 'vaa3dConfig',
     	           return response.data;
                 });
                 return promise;
+            },
+            getJob: function(job_id) {
+                var url = vaa3dConfig.url + "/job/" + job_id;
+                var promise = $http.get(url).then(function (response) {
+                   return response.data;
+                });
+                return promise;
             }
         }
     }

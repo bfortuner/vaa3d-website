@@ -1,28 +1,54 @@
 <div class="container">
 <span ng-show="loading" us-spinner="{lines:10, radius:30, width:14, length: 15, speed:.6}"></span>
-<div class="row" style="margin-top:17px; margin-bottom:17px;">
-  <div class="col-xs-6"><h1 style="margin-top:1px;">Job Items for Job {{jobId}}</h1></div>
+<div class="row">
   <div class="col-xs-6">
-    <input ng-model="searchText" type="text" class="form-control input-md" placeholder="Search by filename">
+    <h3>Line Items For Job {{job.job_id}}</h3>
+  </div>
+  
+  <div class="col-xs-6">
+    <div class="btn-group" style="float:right; margin:15px 0px 0px 0px;">
+      <a role="button" class="btn btn-default" href="#/create_job">Create New Job</a>
+    </div>
+    <div class="btn-group" style="float:right; margin:15px 15px 0px 0px;">
+      <span class="{{job.job_status_class}}">{{job.job_status}}</span>
+    </div>
   </div>
 </div>
+
+  <div class="row" style="margin-top:20px; margin-bottom:10px;">
+    <div class="col-xs-6">
+      <input ng-model="searchText" type="text" class="form-control input-md" placeholder="Search by filenames..">
+    </div><!-- End of search bar -->
+    <div class="col-xs-6" style="padding-left:0px;">
+      <div class="btn-group">
+        <a href="{{job.download_url}}" class="btn btn-default btn-md">Export All Items</a> 
+      </div>
+      <div class="btn-group" style="float:right; margin:15px 15px 0px 0px;">
+        <span class="{{jobStatusClass}}">{{job.job_states.status_name}}</span>
+      </div>
+    </div>
+  </div><!-- End of search row -->
 
 <div class="bs-example">
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-	<th>#</th>
-	<th>Input Filename&nbsp;<a ng-click="setOrderBy('input_filename', sortOrder)" class="sortButtons" href=""><i class="fa fa-sort"></i></a></th>
+  <th>Id</th>
+  <th>Plugin</th>
+  <th>Status</th>
+	<th>Filename&nbsp;<a ng-click="setOrderBy('input_filename', sortOrder)" class="sortButtons" href=""><i class="fa fa-sort"></i></a></th>
   <th>Output Filename&nbsp;<a ng-click="setOrderBy('output_filename', sortOrder)" class="sortButtons" href=""><i class="fa fa-sort"></i></a></th>
-	<th>Download Link</th>
+	<th>Export</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="jobItem in jobItems | filter:searchText">
-      	<td>{{$index+1}}</td>
+      	<td>{{jobItem.job_item_id}}</td>
+        <td>{{job.plugin}}</td>
+        <td>{{jobItem.job_item_status}}</td>
         <td>{{jobItem.filename}}</a></td>
       	<td>{{jobItem.output_filename}}</td>
-      	<td><a href="{{jobItem.download_url}}">Download</a></td>
+      	<td><a href="{{jobItem.download_url}}">Link</a></td>
       </tr>
     </tbody>
   </table>
