@@ -35,6 +35,11 @@ var vaad3dApp = angular.module('vaad3dWebsiteApp', [
         controller: 'CreateJobCtrl',
         controllerAs: 'createJob'
       })
+      .when('/view_job_items/:job_id', {
+        templateUrl: 'jobs/view_job_items.html',
+        controller: 'JobCtrl',
+        controllerAs: 'jobManager'
+      })
       .otherwise({
         redirectTo: '/'
       });
