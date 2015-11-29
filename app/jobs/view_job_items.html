@@ -42,10 +42,10 @@
       </thead>
       <tbody>
         <tr ng-repeat="jobItem in jobItems | filter:searchText">
-        	<td>{{jobItem.job_item_id}}</td>
+        	<td>{{$index+1}}</td>
           <td>{{job.plugin}}</td>
           <td>{{jobItem.job_item_status}}</td>
-          <td>{{jobItem.filename}}</a></td>
+          <td>{{jobItem.input_filename}}</a></td>
         	<td><a href="{{jobItem.download_url}}">Link</a></td>
         </tr>
       </tbody>
