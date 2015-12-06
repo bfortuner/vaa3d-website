@@ -38,6 +38,7 @@
           <th>Status</th>
         	<th>Input Filename&nbsp;<a ng-click="setOrderBy('input_filename', sortOrder)" class="sortButtons" href=""><i class="fa fa-sort"></i></a></th>
         	<th>Output</th>
+          <th>Logs</th>
         </tr>
       </thead>
       <tbody>
@@ -46,7 +47,10 @@
           <td>{{job.plugin}}</td>
           <td>{{jobItem.job_item_status}}</td>
           <td>{{jobItem.input_filename}}</a></td>
-        	<td><a href="{{jobItem.download_url}}">Link</a></td>
+        	<td>
+            <a ng-hide="jobItem.job_item_status === 'ERROR'" href="{{jobItem.download_url}}">Link</a>
+          </td>
+          <td><a target="_blank" href="{{jobItem.logs_download_url}}">Link</a></td>
         </tr>
       </tbody>
     </table>

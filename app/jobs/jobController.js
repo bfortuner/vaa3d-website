@@ -35,7 +35,7 @@ vaad3dApp.controller('JobCtrl',
 			if (job.job_status === 'COMPLETE') {
 				return 'btn btn-success'
 			} else if (job.job_status === 'COMPLETE_WITH_ERRORS') {
-				return 'btn btn-warn'
+				return 'btn btn-warning'
 			} else if (job.job_status === 'ERRORED') {
 				return 'btn btn-error'
 			} else {
