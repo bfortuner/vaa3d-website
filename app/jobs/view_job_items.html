@@ -48,9 +48,13 @@
           <td>{{jobItem.job_item_status}}</td>
           <td>{{jobItem.input_filename}}</a></td>
         	<td>
-            <a ng-hide="jobItem.job_item_status === 'ERROR'" href="{{jobItem.download_url}}">Link</a>
+            <a ng-show="jobItem.job_item_status === 'COMPLETE'" href="{{jobItem.download_url}}">Link</a>
           </td>
-          <td><a target="_blank" href="{{jobItem.logs_download_url}}">Link</a></td>
+          <td>
+            <a ng-show="jobItem.job_item_status === 'COMPLETE' || jobItem.job_item_status === 'ERROR'"
+            target="_blank" href="{{jobItem.logs_download_url}}">Link
+            </a>
+        </td>
         </tr>
       </tbody>
     </table>
